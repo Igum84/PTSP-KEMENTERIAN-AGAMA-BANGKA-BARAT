@@ -1,351 +1,164 @@
-/*
-================================
-1. VARIABEL & RESET DASAR
-================================
-*/
+/* 🌙 Warna dan Variabel Utama */
 :root {
-    --warna-utama: #f6faf9;
-    --warna-sekunder: #28a745;
-    --warna-latar: #f8f9fa;
-    --warna-teks: #343a40;
-    --latar-header-footer: #05582b;
-    --teks-terang: #ffffff;
+  --warna-utama: #2e8b57;
+  --warna-utama-hover: #256b45;
+  --latar-header-footer: #1b1b1b;
+  --teks-terang: #ffffff;
+  --teks-gelap: #222222;
 }
 
+/* 🧱 Reset dasar */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
+/* 🔖 Struktur dasar halaman */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: var(--warna-teks);
-    background-color: var(--warna-latar);
+  background: #f9f9f9;
+  color: var(--teks-gelap);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-h1, h2, h3 {
-    margin-bottom: 0.5em;
-    color: var(--warna-utama);
-}
-
-.highlight-text {
-    color: var(--warna-utama);
-}
-
-a {
-    color: var(--warna-utama);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: var(--warna-sekunder);
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    overflow: hidden;
-}
-
-/*
-================================
-2. HEADER & NAVIGASI (HAMBURGER SELALU)
-================================
-*/
+/* 🔝 Header */
 header {
-    background: var(--latar-header-footer);
-    color: var(--teks-terang);
-    padding: 10px 0;
-    min-height: 70px;
-    border-bottom: 3px solid var(--warna-utama);
-    position: relative;
-    z-index: 1000;
+  width: 100%;
+  background: var(--latar-header-footer);
+  color: var(--teks-terang);
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* 🏷️ Logo */
+header .logo {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
-/* LOGO DAN JUDUL */
-.logo-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo-img {
-    height: 40px;
-    width: auto;
-}
-
-header h1 {
-    margin-bottom: 0;
-    font-size: 1.3em;
-    line-height: 1.2;
-    color: var(--teks-terang);
-}
-
-header h1 .highlight-text {
-    color: var(--warna-utama);
-}
-
-/* --- SELALU PAKAI HAMBURGER MENU DI SEMUA UKURAN --- */
+/* 🍔 Tombol hamburger */
 .hamburger-menu {
-    display: block;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    position: relative;
-    z-index: 1001;
+  display: block;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  position: relative;
+  z-index: 1001;
 }
 
 .hamburger-menu span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px 0;
-    background: var(--teks-terang);
-    transition: all 0.3s ease-in-out;
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px 0;
+  background: var(--teks-terang);
+  transition: all 0.3s ease-in-out;
 }
 
-/* Efek X saat terbuka */
+/* ✖️ Animasi saat hamburger diklik */
 .hamburger-menu.open span:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
+  transform: rotate(-45deg) translate(-5px, 6px);
 }
 .hamburger-menu.open span:nth-child(2) {
-    opacity: 0;
+  opacity: 0;
 }
 .hamburger-menu.open span:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
+  transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* Menu dropdown tersembunyi */
-header nav {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-}
-
+/* 📋 Daftar Menu */
 header nav ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-height: 0;
-    overflow: hidden;
-    background: var(--latar-header-footer);
-    transition: max-height 0.4s ease-in-out;
-    border-top: 1px solid var(--warna-utama);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  background: var(--latar-header-footer);
+  transition: max-height 0.3s ease-in-out;
+  padding: 0;
+  border-top: 1px solid var(--warna-utama);
+  position: absolute;
+  top: 70px;
+  left: 0;
+  z-index: 1000;
 }
 
+/* 🎢 Saat menu aktif dibuka */
 header nav ul.active {
-    max-height: 500px;
-    padding: 10px 0;
+  max-height: 80vh; /* agar tidak lebih tinggi dari layar */
+  padding: 10px 0;
+  overflow-y: auto; /* scroll jika menu panjang */
+  scrollbar-width: thin;
 }
 
+/* 🌈 Scrollbar kustom */
+header nav ul.active::-webkit-scrollbar {
+  width: 6px;
+}
+
+header nav ul.active::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+}
+
+header nav ul.active::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* 🔗 Item menu */
 header nav ul li {
-    width: 100%;
-    text-align: center;
+  list-style: none;
+  text-align: center;
 }
 
 header nav ul li a {
-    display: block;
-    padding: 15px;
-    color: var(--teks-terang);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: background 0.3s ease;
+  display: block;
+  padding: 15px;
+  color: var(--teks-terang);
+  text-decoration: none;
+  transition: background 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 header nav ul li a:hover {
-    background: rgba(255, 255, 255, 0.15);
+  background: var(--warna-utama-hover);
 }
 
-/*
-================================
-3. HERO SECTION (CAROUSEL)
-================================
-*/
-#hero {
-    height: 450px;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
+/* 🧭 Konten utama */
+main {
+  padding: 100px 20px 50px;
 }
 
-.carousel-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-
-.carousel-track {
-    display: flex;
-    height: 100%;
-    transition: transform 0.8s ease-in-out;
-}
-
-.carousel-slide {
-    min-width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-}
-
-.carousel-slide::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1;
-}
-
-.slide-content {
-    position: relative;
-    z-index: 2;
-    color: var(--teks-terang);
-    max-width: 700px;
-}
-
-.slide-content h1 {
-    color: var(--teks-terang);
-    font-size: 3em;
-    margin-bottom: 15px;
-}
-
-.slide-content p {
-    font-size: 1.2em;
-}
-
-.btn {
-    display: inline-block;
-    background: var(--warna-sekunder);
-    color: var(--teks-terang);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.btn:hover {
-    background: #218838;
-}
-
-/* Navigasi Dot Carousel */
-.carousel-nav {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-}
-
-.dot {
-    height: 10px;
-    width: 10px;
-    margin: 0 5px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    display: inline-block;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.dot.active {
-    background-color: var(--warna-utama);
-}
-
-/*
-================================
-4. MENU GRID
-================================
-*/
-.menu-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 15px;
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-.menu-item {
-    background: linear-gradient(135deg, rgba(5, 39, 5, 0.85), rgba(30, 58, 58, 0.85));
-    padding: 15px;
-    border-radius: 12px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    text-align: center;
-    color: var(--teks-terang);
-}
-
-.menu-item:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, rgba(221, 113, 140, 0.95), rgba(117, 223, 117, 0.95));
-    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
-}
-
-.menu-item img {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
-}
-
-.menu-item span {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: bold;
-}
-
-/*
-================================
-5. FOOTER
-================================
-*/
+/* 🦶 Footer */
 footer {
-    background: var(--latar-header-footer);
-    color: var(--teks-terang);
-    text-align: center;
-    padding: 20px 0;
-    margin-top: 30px;
+  background: var(--latar-header-footer);
+  color: var(--teks-terang);
+  text-align: center;
+  padding: 15px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
 
-/*
-================================
-6. MEDIA QUERIES (RESPONSIF)
-================================
-*/
-@media (max-width: 900px) {
-    header h1 {
-        font-size: 1.1em;
-    }
-}
+/* 📱 Responsif tambahan */
+@media (min-width: 768px) {
+  /* Header tetap sama */
+  header nav ul {
+    flex-direction: column;
+  }
 
-@media (max-width: 768px) {
-    #hero {
-        height: 350px;
-    }
-    .slide-content h1 {
-        font-size: 2em;
-    }
+  main {
+    padding: 120px 40px;
+  }
 }
