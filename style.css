@@ -9,7 +9,7 @@
     /* 🎨 Variabel Warna Media Sosial */
     --warna-facebook: #1877f2;
     --warna-twitter: #1da1f2;
-    --warna-instagram: #e1306c; /* atau gradient */
+    --warna-instagram: #e1306c;
     --warna-youtube: #ff0000;
     --warna-whatsapp: #25d366;
     --warna-gmail: #ea4335;
@@ -23,30 +23,24 @@
     font-family: "Poppins", sans-serif;
 }
 
-/* 🔖 Struktur dasar halaman (MODIFIKASI UNTUK STICKY FOOTER) */
-html, body {
-    height: 100%; /* Penting untuk sticky footer */
+/* 📌 IMPLEMENTASI STICKY FOOTER */
+html {
+    height: 100%; /* HTML harus 100% dari viewport */
 }
 
-/* Container utama untuk sticky footer */
-.page-wrapper {
+body.page-wrapper {
     background: #f9f9f9;
     color: var(--teks-gelap);
-    display: flex; /* Menggunakan flexbox pada body */
-    flex-direction: column;
-    min-height: 100vh; /* Agar minimal setinggi viewport */
+    min-height: 100vh; /* Minimal setinggi viewport */
     overflow-x: hidden;
+    
+    /* Menggunakan Flexbox untuk menyusun header, main, dan footer secara vertikal */
+    display: flex;
+    flex-direction: column; 
 }
 
-/* Konten utama akan mengambil sisa ruang yang tersedia */
-main.content-wrap {
-    flex-grow: 1; /* Konten tumbuh untuk mendorong footer ke bawah */
-    padding-top: 65px; /* Sesuaikan dengan tinggi header fixed Anda */
-}
-
-/* --- Bagian Header (TETAP) --- */
+/* ===== HEADER (Gaya Dasar TETAP) ===== */
 header {
-    /* ... kode header yang sudah ada ... */
     width: 100%;
     background: var(--latar-header-footer);
     color: var(--teks-terang);
@@ -59,15 +53,13 @@ header {
     justify-content: center;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
-
 header .container {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px; /* Tambahkan agar tidak terlalu lebar di desktop */
 }
-/* ... kode header, logo, dan nav lainnya (TETAP) ... */
+/* ... (Gaya Logo, Hamburger, dan Navigasi lainnya TETAP) ... */
 .logo-wrapper {
     display: flex;
     align-items: center;
@@ -123,7 +115,7 @@ nav ul {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 58px; /* Sesuaikan agar pas di bawah header */
+    top: 58px; 
     left: 0;
     width: 100%;
     max-height: 0;
@@ -161,7 +153,12 @@ nav ul li a:hover {
     background: var(--warna-utama-hover);
 }
 
-/* ===== KONTEN (TETAP) ===== */
+/* ===== KONTEN UTAMA (PENTING UNTUK STICKY FOOTER) ===== */
+main.content-wrap {
+    flex-grow: 1; /* Konten tumbuh untuk MENDORONG footer ke bawah */
+    padding-top: 65px; /* Kompensasi untuk header fixed */
+}
+
 .hero {
     text-align: center;
     padding: 60px 20px;
@@ -200,14 +197,13 @@ nav ul li a:hover {
     font-weight: 500;
 }
 
-/* ===== FOOTER (MODIFIKASI) ===== */
+/* ===== FOOTER (MODIFIKASI & Penataan) ===== */
 footer {
     width: 100%;
     background: var(--latar-header-footer);
     color: var(--teks-terang);
     text-align: center;
-    padding: 25px 20px; /* Tambah padding */
-    margin-top: auto; /* Penting untuk sticky footer */
+    padding: 25px 20px;
 }
 
 .footer-content {
@@ -241,10 +237,14 @@ footer {
 .social-icon {
     color: var(--teks-terang);
     font-size: 1.5rem;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease; /* Tambah transisi */
 }
 
 /* Efek Hover Warna Asli Media Sosial */
+.social-icon:hover {
+    transform: translateY(-3px); /* Efek visual kecil saat di-hover */
+}
+
 .social-icon.facebook:hover {
     color: var(--warna-facebook);
 }
@@ -275,8 +275,9 @@ footer {
     opacity: 0.7;
 }
 
-/* 📱 Responsif Desktop (TETAP) */
+/* 📱 Responsif Desktop */
 @media (min-width: 768px) {
+    /* ... (Gaya Navigasi Desktop TETAP) ... */
     nav ul {
         position: static;
         max-height: none;
@@ -306,14 +307,16 @@ footer {
         text-align: left;
         margin-bottom: 0;
         flex: 1;
+        order: 1; /* Urutan pertama */
     }
 
     .social-links {
         margin-bottom: 0;
+        order: 2; /* Urutan kedua */
     }
 
     .copyright-text {
-        order: 3; /* Pindahkan copyright ke paling kanan/bawah */
+        order: 3; /* Urutan ketiga */
         text-align: right;
         flex: 1;
     }
