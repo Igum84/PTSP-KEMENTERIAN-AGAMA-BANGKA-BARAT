@@ -1,326 +1,320 @@
 /* 🌙 Warna dan Variabel Utama */
 :root {
-  --warna-utama: #2e8b57;
-  --warna-utama-hover: #256b45;
-  --latar-header-footer: #1b1b1b;
-  --teks-terang: #ffffff;
-  --teks-gelap: #222222;
+    --warna-utama: #2e8b57;
+    --warna-utama-hover: #256b45;
+    --latar-header-footer: #1b1b1b;
+    --teks-terang: #ffffff;
+    --teks-gelap: #222222;
+
+    /* 🎨 Variabel Warna Media Sosial */
+    --warna-facebook: #1877f2;
+    --warna-twitter: #1da1f2;
+    --warna-instagram: #e1306c; /* atau gradient */
+    --warna-youtube: #ff0000;
+    --warna-whatsapp: #25d366;
+    --warna-gmail: #ea4335;
 }
 
-/* 🧱 Reset dasar */
+/* 🧱 Reset dasar (TETAP) */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
 }
 
-/* 🔖 Struktur dasar halaman */
-body {
-  background: #f9f9f9;
-  color: var(--teks-gelap);
-  min-height: 100vh;
-  overflow-x: hidden;
+/* 🔖 Struktur dasar halaman (MODIFIKASI UNTUK STICKY FOOTER) */
+html, body {
+    height: 100%; /* Penting untuk sticky footer */
 }
 
-/* 🔝 Header */
+/* Container utama untuk sticky footer */
+.page-wrapper {
+    background: #f9f9f9;
+    color: var(--teks-gelap);
+    display: flex; /* Menggunakan flexbox pada body */
+    flex-direction: column;
+    min-height: 100vh; /* Agar minimal setinggi viewport */
+    overflow-x: hidden;
+}
+
+/* Konten utama akan mengambil sisa ruang yang tersedia */
+main.content-wrap {
+    flex-grow: 1; /* Konten tumbuh untuk mendorong footer ke bawah */
+    padding-top: 65px; /* Sesuaikan dengan tinggi header fixed Anda */
+}
+
+/* --- Bagian Header (TETAP) --- */
 header {
-  width: 100%;
-  background: var(--latar-header-footer);
-  color: var(--teks-terang);
-  padding: 15px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-/* 🏷️ Logo */
-header .logo {
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-
-/* 🍔 Tombol hamburger */
-.hamburger-menu {
-  display: block;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  position: relative;
-  z-index: 1001;
-}
-
-.hamburger-menu span {
-  display: block;
-  width: 25px;
-  height: 3px;
-  margin: 5px 0;
-  background: var(--teks-terang);
-  transition: all 0.3s ease-in-out;
-}
-
-/* ✖️ Animasi saat hamburger diklik */
-.hamburger-menu.open span:nth-child(1) {
-  transform: rotate(-45deg) translate(-5px, 6px);
-}
-.hamburger-menu.open span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger-menu.open span:nth-child(3) {
-  transform: rotate(45deg) translate(-5px, -6px);
-}
-
-/* 📋 Daftar Menu */
-header nav ul {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-height: 0;
-  overflow: hidden;
-  background: var(--latar-header-footer);
-  transition: max-height 0.3s ease-in-out;
-  padding: 0;
-  border-top: 1px solid var(--warna-utama);
-  position: absolute;
-  top: 70px;
-  left: 0;
-  z-index: 1000;
-}
-
-/* 🎢 Saat menu aktif dibuka */
-header nav ul.active {
-  max-height: 80vh; /* agar tidak lebih tinggi dari layar */
-  padding: 10px 0;
-  overflow-y: auto; /* scroll jika menu panjang */
-  scrollbar-width: thin;
-}
-
-/* 🌈 Scrollbar kustom */
-header nav ul.active::-webkit-scrollbar {
-  width: 6px;
-}
-
-header nav ul.active::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 10px;
-}
-/* 🌙 Warna dan Variabel Utama */
-:root {
-  --warna-utama: #2e8b57;
-  --warna-utama-hover: #256b45;
-  --latar-header-footer: #1b1b1b;
-  --teks-terang: #ffffff;
-  --teks-gelap: #222222;
-}
-
-/* 🧱 Reset dasar */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-/* 🔖 Struktur dasar */
-body {
-  background: #f9f9f9;
-  color: var(--teks-gelap);
-  overflow-x: hidden;
-}
-
-/* ===== HEADER ===== */
-header {
-  width: 100%;
-  background: var(--latar-header-footer);
-  color: var(--teks-terang);
-  padding: 10px 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    /* ... kode header yang sudah ada ... */
+    width: 100%;
+    background: var(--latar-header-footer);
+    color: var(--teks-terang);
+    padding: 10px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 header .container {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Tambahkan agar tidak terlalu lebar di desktop */
 }
-
-/* 🏷️ Logo kecil di kiri */
+/* ... kode header, logo, dan nav lainnya (TETAP) ... */
 .logo-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .logo-wrapper h1 {
-  font-size: 1rem;
-  font-weight: 500;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 .logo-wrapper .highlight-text {
-  color: var(--warna-utama);
+    color: var(--warna-utama);
 }
 
 .logo-img {
-  width: 38px;
-  height: 38px;
-  object-fit: contain;
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
 }
 
 /* 🍔 Hamburger */
 .hamburger-menu {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  z-index: 1100;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1100;
 }
 
 .hamburger-menu span {
-  display: block;
-  width: 25px;
-  height: 3px;
-  margin: 5px 0;
-  background: var(--teks-terang);
-  transition: all 0.3s ease;
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background: var(--teks-terang);
+    transition: all 0.3s ease;
 }
 
 /* ✖️ animasi */
 .hamburger-menu.open span:nth-child(1) {
-  transform: rotate(-45deg) translate(-5px, 6px);
+    transform: rotate(-45deg) translate(-5px, 6px);
 }
 .hamburger-menu.open span:nth-child(2) {
-  opacity: 0;
+    opacity: 0;
 }
 .hamburger-menu.open span:nth-child(3) {
-  transform: rotate(45deg) translate(-5px, -6px);
+    transform: rotate(45deg) translate(-5px, -6px);
 }
 
 /* 📋 NAV MENU */
 nav ul {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 65px;
-  left: 0;
-  width: 100%;
-  max-height: 0;
-  overflow: hidden;
-  background: var(--latar-header-footer);
-  transition: max-height 0.3s ease;
-  border-top: 1px solid var(--warna-utama);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 58px; /* Sesuaikan agar pas di bawah header */
+    left: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    background: var(--latar-header-footer);
+    transition: max-height 0.3s ease;
+    border-top: 1px solid var(--warna-utama);
 }
 
 nav ul.active {
-  max-height: 80vh;
-  overflow-y: auto;
-  padding: 10px 0;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 10px 0;
 }
 
 /* 🌈 scrollbar custom */
 nav ul.active::-webkit-scrollbar {
-  width: 6px;
+    width: 6px;
 }
 nav ul.active::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.3);
-  border-radius: 10px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
 }
 
 /* 🔗 item menu */
 nav ul li a {
-  display: block;
-  padding: 14px;
-  color: var(--teks-terang);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  transition: background 0.3s ease;
+    display: block;
+    padding: 14px;
+    color: var(--teks-terang);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.3s ease;
 }
 nav ul li a:hover {
-  background: var(--warna-utama-hover);
+    background: var(--warna-utama-hover);
 }
 
-/* ===== KONTEN ===== */
-main {
-  padding-top: 90px;
-}
-
+/* ===== KONTEN (TETAP) ===== */
 .hero {
-  text-align: center;
-  padding: 60px 20px;
-  background: var(--warna-utama);
-  color: white;
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--warna-utama);
+    color: white;
 }
 
 .menu-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
-  padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
 .menu-item {
-  background: white;
-  border-radius: 10px;
-  text-align: center;
-  padding: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
-  cursor: pointer;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+    cursor: pointer;
 }
 .menu-item:hover {
-  transform: translateY(-5px);
+    transform: translateY(-5px);
 }
 
 .menu-item img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
 }
 .menu-item span {
-  display: block;
-  margin-top: 10px;
-  font-weight: 500;
+    display: block;
+    margin-top: 10px;
+    font-weight: 500;
 }
 
-/* ===== FOOTER ===== */
+/* ===== FOOTER (MODIFIKASI) ===== */
 footer {
-  background: var(--latar-header-footer);
-  color: var(--teks-terang);
-  text-align: center;
-  padding: 20px;
-  margin-top: 30px;
+    width: 100%;
+    background: var(--latar-header-footer);
+    color: var(--teks-terang);
+    text-align: center;
+    padding: 25px 20px; /* Tambah padding */
+    margin-top: auto; /* Penting untuk sticky footer */
 }
 
-/* 📱 Responsif Desktop */
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Styling Alamat */
+.footer-address {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.footer-address strong {
+    font-size: 1.1rem;
+    color: var(--warna-utama);
+}
+
+/* Styling Ikon Media Sosial */
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.social-icon {
+    color: var(--teks-terang);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+/* Efek Hover Warna Asli Media Sosial */
+.social-icon.facebook:hover {
+    color: var(--warna-facebook);
+}
+
+.social-icon.twitter:hover {
+    color: var(--warna-twitter);
+}
+
+.social-icon.instagram:hover {
+    color: var(--warna-instagram);
+}
+
+.social-icon.youtube:hover {
+    color: var(--warna-youtube);
+}
+
+.social-icon.whatsapp:hover {
+    color: var(--warna-whatsapp);
+}
+
+.social-icon.gmail:hover {
+    color: var(--warna-gmail);
+}
+
+.copyright-text {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* 📱 Responsif Desktop (TETAP) */
 @media (min-width: 768px) {
-  nav ul {
-    position: static;
-    max-height: none;
-    flex-direction: row;
-    justify-content: flex-end;
-    background: transparent;
-    border: none;
-  }
+    nav ul {
+        position: static;
+        max-height: none;
+        flex-direction: row;
+        justify-content: flex-end;
+        background: transparent;
+        border: none;
+    }
 
-  nav ul li a {
-    border: none;
-    padding: 10px 15px;
-  }
+    nav ul li a {
+        border: none;
+        padding: 10px 15px;
+    }
 
-  .hamburger-menu {
-    display: none;
-  }
+    .hamburger-menu {
+        display: none;
+    }
+
+    /* Penataan footer di desktop */
+    footer .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer-address {
+        text-align: left;
+        margin-bottom: 0;
+        flex: 1;
+    }
+
+    .social-links {
+        margin-bottom: 0;
+    }
+
+    .copyright-text {
+        order: 3; /* Pindahkan copyright ke paling kanan/bawah */
+        text-align: right;
+        flex: 1;
+    }
 }
-
