@@ -1,8 +1,7 @@
-// Jalankan setelah halaman selesai dimuat
 document.addEventListener("DOMContentLoaded", function () {
     
     // ===================================
-    // 1. LOGIKA HAMBURGER MENU (Kode Anda Sebelumnya)
+    // 1. LOGIKA HAMBURGER MENU 
     // ===================================
     const hamburger = document.querySelector(".hamburger-menu");
     const navList = document.querySelector("header nav ul");
@@ -34,17 +33,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Optional: efek smooth scroll untuk navigasi internal
+    // Efek smooth scroll (Optional)
     navLinks.forEach(link => {
         link.addEventListener("click", (e) => {
             const targetId = link.getAttribute("href");
             if (targetId && targetId.startsWith("#")) {
                 e.preventDefault();
                 const targetElement = document.querySelector(targetId);
-                // top: targetElement.offsetTop - 70; (Menyesuaikan dengan tinggi header)
                 if (targetElement) {
+                    // Offset dikurangi 70px agar tidak tertutup header
                     window.scrollTo({
-                        top: targetElement.offsetTop - 70,
+                        top: targetElement.offsetTop - 70, 
                         behavior: "smooth"
                     });
                 }
@@ -53,19 +52,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // ===================================
-    // 2. LOGIKA CAROUSEL OTOMATIS (Tambahan Baru)
+    // 2. LOGIKA CAROUSEL OTOMATIS (5 DETIK)
     // ===================================
     const slider = document.querySelector('.carousel-slider');
-    // Mencari semua item termasuk duplikat di HTML
     const items = document.querySelectorAll('.carousel-item'); 
     
     if (slider && items.length > 1) {
-        const totalSlides = items.length; // 4 (3 asli + 1 duplikat)
+        const totalSlides = items.length; // 4 item (3 asli + 1 duplikat)
         let currentIndex = 0;
         const intervalTime = 5000; // 5000ms = 5 detik
 
         function updateSliderPosition() {
-            // Persentase pergeseran dihitung berdasarkan total item (4 item = 25% per item)
+            // Persentase pergeseran: (Index saat ini) * (25% per item)
             const percentage = currentIndex * (100 / totalSlides);
             slider.style.transform = `translateX(-${percentage}%)`;
         }
@@ -77,9 +75,9 @@ document.addEventListener("DOMContentLoaded", function () {
             // Cek jika sudah mencapai slide duplikat (index 3)
             if (currentIndex === totalSlides - 1) {
                 
-                // Setelah transisi (0.5s di CSS) selesai, reset posisi ke slide 0 tanpa animasi.
+                // Tunggu 500ms (sesuai transisi di CSS)
                 setTimeout(() => {
-                    slider.style.transition = 'none'; // Matikan transisi
+                    slider.style.transition = 'none'; // Matikan transisi untuk reset instan
                     currentIndex = 0;
                     updateSliderPosition();
                     
@@ -87,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     setTimeout(() => {
                         slider.style.transition = 'transform 0.5s ease-in-out';
                     }, 50); 
-                }, 500); // Harus sama dengan waktu transisi di CSS
+                }, 500); 
             }
         }
 
