@@ -79,6 +79,7 @@ header .container {
 
 /* 🍔 Hamburger */
 .hamburger-menu {
+    display: block; /* Agar hamburger selalu tampil */
     background: transparent;
     border: none;
     cursor: pointer;
@@ -104,7 +105,7 @@ header .container {
     transform: rotate(45deg) translate(-5px, -6px);
 }
 
-/* 📋 NAV MENU */
+/* 📋 NAV MENU (Selalu disembunyikan secara default) */
 nav ul {
     display: flex;
     flex-direction: column;
@@ -147,20 +148,20 @@ nav ul li a:hover {
 /* ===== KONTEN UTAMA ===== */
 main.content-wrap {
     flex-grow: 1; /* Mendorong footer ke bawah */
-    padding-top: 58px; /* Kompensasi untuk header fixed (sesuaikan jika perlu) */
+    padding-top: 58px; /* Kompensasi untuk header fixed */
 }
 
-/* ===== GAYA CAROUSEL BARU ===== */
+/* ===== GAYA CAROUSEL ===== */
 .carousel-container {
     width: 100%;
     overflow: hidden; 
     position: relative;
-    max-height: 300px; /* Batasi tinggi carousel di mobile */
+    max-height: 300px;
 }
 
 .carousel-slider {
     display: flex; 
-    width: 400%; /* 4 slide * 100% */
+    width: 400%; /* (3 asli + 1 duplikat) * 100% */
     transition: transform 0.5s ease-in-out; /* Animasi pergeseran */
 }
 
@@ -230,7 +231,7 @@ main.content-wrap {
     font-weight: 500;
 }
 
-/* ===== FOOTER (MODIFIKASI & Penataan) ===== */
+/* ===== FOOTER (ALAMAT & SOSIAL MEDIA) ===== */
 footer {
     width: 100%;
     background: var(--latar-header-footer);
@@ -298,25 +299,9 @@ footer {
     opacity: 0.7;
 }
 
-/* 📱 Responsif Desktop */
+/* 📱 Responsif Desktop (HANYA UNTUK FOOTER & CAROUSEL) */
 @media (min-width: 768px) {
-    /* Header/Nav */
-    nav ul {
-        position: static;
-        max-height: none;
-        flex-direction: row;
-        justify-content: flex-end;
-        background: transparent;
-        border: none;
-    }
-    nav ul li a {
-        border: none;
-        padding: 10px 15px;
-    }
-    .hamburger-menu {
-        display: none;
-    }
-
+    
     /* Carousel */
     .carousel-container {
         max-height: 500px;
