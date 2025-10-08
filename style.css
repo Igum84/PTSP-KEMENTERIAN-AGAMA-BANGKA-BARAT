@@ -4,12 +4,12 @@
 ================================
 */
 :root {
-    --warna-utama: #f6faf9; /* Biru cerah (untuk highlight/tombol) */
-    --warna-sekunder: #28a745; /* Hijau (untuk hover/tombol sekunder) */
-    --warna-latar: #f8f9fa; /* Abu-abu muda (latar utama body) */
-    --warna-teks: #343a40; /* Hitam keabuan (teks utama) */
-    --latar-header-footer: #05582b; /* Warna header/footer baru */
-    --teks-terang: #ffffff; /* Putih (untuk teks di atas header/footer) */
+    --warna-utama: #f6faf9;
+    --warna-sekunder: #28a745;
+    --warna-latar: #f8f9fa;
+    --warna-teks: #343a40;
+    --latar-header-footer: #05582b;
+    --teks-terang: #ffffff;
 }
 
 * {
@@ -34,10 +34,6 @@ h1, h2, h3 {
     color: var(--warna-utama);
 }
 
-p {
-    margin-bottom: 1em;
-}
-
 a {
     color: var(--warna-utama);
     text-decoration: none;
@@ -57,24 +53,26 @@ a:hover {
 
 /*
 ================================
-2. HEADER & NAVIGASI (FLEXBOX)
+2. HEADER & NAVIGASI (HAMBURGER SELALU)
 ================================
 */
 header {
-    background: var(--latar-header-footer); 
+    background: var(--latar-header-footer);
     color: var(--teks-terang);
     padding: 10px 0;
     min-height: 70px;
-    border-bottom: 3px solid var(--warna-utama); 
+    border-bottom: 3px solid var(--warna-utama);
+    position: relative;
+    z-index: 1000;
 }
 
 header .container {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
 }
 
-/* STYLING LOGO DAN JUDUL */
+/* LOGO DAN JUDUL */
 .logo-wrapper {
     display: flex;
     align-items: center;
@@ -87,46 +85,88 @@ header .container {
 }
 
 header h1 {
-    margin-bottom: 0; 
+    margin-bottom: 0;
     font-size: 1.3em;
     line-height: 1.2;
-    color: var(--teks-terang); 
+    color: var(--teks-terang);
 }
 
 header h1 .highlight-text {
     color: var(--warna-utama);
 }
 
-header a {
-    color: var(--teks-terang);
+/* --- SELALU PAKAI HAMBURGER MENU DI SEMUA UKURAN --- */
+.hamburger-menu {
+    display: block;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+    z-index: 1001;
 }
 
-header a:hover {
-    color: var(--warna-utama);
+.hamburger-menu span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px 0;
+    background: var(--teks-terang);
+    transition: all 0.3s ease-in-out;
 }
 
-/* Navigasi Desktop */
+/* Efek X saat terbuka */
+.hamburger-menu.open span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+.hamburger-menu.open span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-menu.open span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Menu dropdown tersembunyi */
 header nav {
-    flex-grow: 1; 
-    display: flex;
-    justify-content: flex-end; 
-    margin-right: 20px;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
 }
 
 header nav ul {
-    list-style: none;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    background: var(--latar-header-footer);
+    transition: max-height 0.4s ease-in-out;
+    border-top: 1px solid var(--warna-utama);
+}
+
+header nav ul.active {
+    max-height: 500px;
+    padding: 10px 0;
 }
 
 header nav ul li {
-    margin-left: 20px;
+    width: 100%;
+    text-align: center;
 }
 
-/* Sembunyikan hamburger menu secara default di desktop */
-.hamburger-menu {
-    display: none;
+header nav ul li a {
+    display: block;
+    padding: 15px;
+    color: var(--teks-terang);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.3s ease;
 }
 
+header nav ul li a:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
 
 /*
 ================================
@@ -134,8 +174,8 @@ header nav ul li {
 ================================
 */
 #hero {
-    height: 450px; 
-    overflow: hidden; 
+    height: 450px;
+    overflow: hidden;
     position: relative;
     width: 100%;
 }
@@ -147,25 +187,24 @@ header nav ul li {
 }
 
 .carousel-track {
-    display: flex; 
+    display: flex;
     height: 100%;
-    transition: transform 0.8s ease-in-out; 
+    transition: transform 0.8s ease-in-out;
 }
 
 .carousel-slide {
-    min-width: 100%; 
+    min-width: 100%;
     height: 100%;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     text-align: center;
     position: relative;
 }
 
-/* Overlay gelap agar teks lebih mudah dibaca di atas gambar */
 .carousel-slide::before {
     content: '';
     position: absolute;
@@ -173,22 +212,23 @@ header nav ul li {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4); 
+    background: rgba(0, 0, 0, 0.4);
     z-index: 1;
 }
 
 .slide-content {
     position: relative;
-    z-index: 2; 
+    z-index: 2;
     color: var(--teks-terang);
     max-width: 700px;
 }
 
 .slide-content h1 {
-    color: var(--teks-terang); 
+    color: var(--teks-terang);
     font-size: 3em;
     margin-bottom: 15px;
 }
+
 .slide-content p {
     font-size: 1.2em;
 }
@@ -210,7 +250,7 @@ header nav ul li {
     background: #218838;
 }
 
-/* Navigasi Dot (Indikator) */
+/* Navigasi Dot Carousel */
 .carousel-nav {
     position: absolute;
     bottom: 20px;
@@ -234,10 +274,9 @@ header nav ul li {
     background-color: var(--warna-utama);
 }
 
-
 /*
 ================================
-4. KONTEN UTAMA (GRID)
+4. MENU GRID
 ================================
 */
 .menu-container {
@@ -256,6 +295,8 @@ header nav ul li {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    text-align: center;
+    color: var(--teks-terang);
 }
 
 .menu-item:hover {
@@ -275,13 +316,14 @@ header nav ul li {
     font-size: 0.85rem;
     font-weight: bold;
 }
+
 /*
 ================================
 5. FOOTER
 ================================
 */
 footer {
-    background: var(--latar-header-footer); 
+    background: var(--latar-header-footer);
     color: var(--teks-terang);
     text-align: center;
     padding: 20px 0;
@@ -290,101 +332,16 @@ footer {
 
 /*
 ================================
-6. MEDIA QUERIES (RESPONSIVITAS)
+6. MEDIA QUERIES (RESPONSIF)
 ================================
 */
-
 @media (max-width: 900px) {
-    header h1 {
-        font-size: 1.2em;
-    }
-}
-
-
-@media (max-width: 768px) {
-    /* Tampilkan hamburger menu di layar kecil */
-    .hamburger-menu {
-        display: block;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 10px;
-        position: relative;
-        z-index: 1001;
-        margin-right: -10px;
-    }
-
-    .hamburger-menu span {
-        display: block;
-        width: 25px;
-        height: 3px;
-        margin: 5px 0;
-        background: var(--teks-terang);
-        transition: all 0.3s ease-in-out;
-    }
-
-    /* Transformasi menjadi X saat menu aktif (JS menambahkan class 'open') */
-    .hamburger-menu.open span:nth-child(1) {
-        transform: rotate(-45deg) translate(-5px, 6px);
-    }
-    .hamburger-menu.open span:nth-child(2) {
-        opacity: 0;
-    }
-    .hamburger-menu.open span:nth-child(3) {
-        transform: rotate(45deg) translate(-5px, -6px);
-    }
-    
-    /* Tata letak Header di Mobile (Logo/Judul di kiri, Hamburger di kanan) */
-    header .container {
-        flex-direction: row; 
-        justify-content: space-between; 
-        align-items: center;
-    }
-
     header h1 {
         font-size: 1.1em;
     }
+}
 
-    /* Sembunyikan dan posisikan navigasi di mode mobile */
-    header nav {
-        flex-grow: 0;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        width: 100%;
-        margin-right: 0;
-    }
-    
-    header nav ul {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        max-height: 0;
-        overflow: hidden;
-        background: var(--latar-header-footer); 
-        transition: max-height 0.3s ease-in-out;
-        z-index: 1000;
-        padding: 0;
-        border-top: 1px solid var(--warna-utama);
-    }
-
-    /* Tampilkan menu saat JS menambahkan class 'active' */
-    header nav ul.active {
-        max-height: 300px;
-        padding: 10px 0;
-    }
-
-    header nav ul li {
-        margin: 0;
-        text-align: center;
-    }
-
-    header nav ul li a {
-        padding: 15px;
-        display: block;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
+@media (max-width: 768px) {
     #hero {
         height: 350px;
     }
